@@ -14,9 +14,11 @@ class Todo(db.Model):
   def __repr__(self):
     return '<Task %r>' % self.id
   
+# Initialize the sqlite database
 with app.app_context():
   db.create_all()
 
+# Index Route
 @app.route('/', methods=['POST', 'GET'])
 def index():
   if request.method == 'POST':
@@ -34,6 +36,7 @@ def index():
     tasks = Todo.query.order_by(Todo.date_created).all()
     return render_template('index.html', tasks=tasks);
 
+# Delete Route
 @app.route('/delete/<int:id>')
 def delete(id):
   task_to_delete = Todo.query.get_or_404(id)
@@ -45,6 +48,7 @@ def delete(id):
   except:
     return 'There was a problem deleting that task'
   
+# Update Route
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 def update(id):
   task = Todo.query.get_or_404(id)
