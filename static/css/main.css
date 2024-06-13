@@ -10,6 +10,7 @@ body, html {
 
 table, td, th {
   border: 1px solid #aaa;
+  margin-bottom: 20px;
 }
 
 table {
